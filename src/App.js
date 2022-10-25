@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -31,15 +30,12 @@ class App extends React.Component {
   render() {
       return (
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            
-            <button onClick={this.goToBoysPage}>Boys</button>
-            <button onClick={this.goToGirlsPage}>Girls</button>
-          </header>
+          <h1 class="Greeting">Welcome to the Baby Name Generator!</h1>
+          <p class="intro">Just click for Boy names or Girl names to get started!</p>
+          <div class="HomeButtons">
+            <button class="home_button" id="boy_home_button" onClick={this.goToBoysPage}>Boys</button>
+            <button class="home_button" id="girl_home_button" onClick={this.goToGirlsPage}>Girls</button>
+          </div>
         </div> 
       );
   }
@@ -61,6 +57,7 @@ class BoysPage extends React.Component {
     event.preventDefault();
     var gender = 'boy';
     var endpoint = 'https://api.api-ninjas.com/v1/babynames?gender=' + gender;
+    endpoint = endpoint + "&popular_only=true";
     axios({
       url: endpoint,
       method: "GET",
@@ -72,7 +69,6 @@ class BoysPage extends React.Component {
     .then(response => {
       let data = response.data;
       this.setState({newData: data});
-      console.log(data);
     })
     .catch(error => {
       this.setState({names:[]});
@@ -100,15 +96,20 @@ class BoysPage extends React.Component {
   render() {
     const listItems = [];
     for (let i = 0; i < this.state.newData.length; i++) {
-      listItems.push(<li key={this.state.newData[i]}>{this.state.newData[i]}</li>);
+      listItems.push(<li class="list_item" key={this.state.newData[i]}>{this.state.newData[i]}</li>);
+    }
+    if (listItems.length === 0) {
+      listItems.push(<li class="list_item">Names will appear here!</li>);
     }
     return (
-        <div>
-          <p>Boys</p>
-          <button onClick={this.goToHomePage}>Home</button>
-          <button onClick={this.goToGirlsPage}>Girls</button>
-          <button onClick={this.getNames}>Get Names</button>
-          <ul>{listItems}</ul>
+        <div className="App">
+          <h1 class="title">Boy Names</h1>
+          <div class="page_buttons">
+            <button class="page_button" id="home_home_button" onClick={this.goToHomePage}>Home</button>
+            <button class="page_button" id="girl_home_button" onClick={this.goToGirlsPage}>Girls</button>
+            <button class="page_button" id="boy_home_button" onClick={this.getNames}>Get Names</button>
+          </div>
+          <ul class="list_names" id="boy_list">{listItems}</ul>
         </div>
       );
   }
@@ -118,7 +119,7 @@ class GirlsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newData: {}
+      newData: {"name": "names will appear here!"}
     };
     this.goToHomePage = this.goToHomePage.bind(this);
     this.goToBoysPage = this.goToBoysPage.bind(this);
@@ -129,6 +130,7 @@ class GirlsPage extends React.Component {
     event.preventDefault();
     var gender = 'girl';
     var endpoint = 'https://api.api-ninjas.com/v1/babynames?gender=' + gender;
+    endpoint = endpoint + "&popular_only=false";
     axios({
       url: endpoint,
       method: "GET",
@@ -140,7 +142,6 @@ class GirlsPage extends React.Component {
     .then(response => {
       let data = response.data;
       this.setState({newData: data});
-      console.log(data);
     })
     .catch(error => {
       this.setState({names:[]});
@@ -167,17 +168,22 @@ class GirlsPage extends React.Component {
   render() {
     const listItems = [];
     for (let i = 0; i < this.state.newData.length; i++) {
-      listItems.push(<li key={this.state.newData[i]}>{this.state.newData[i]}</li>);
+      listItems.push(<li class="list_item" key={this.state.newData[i]}>{this.state.newData[i]}</li>);
+    }
+    if (listItems.length === 0) {
+      listItems.push(<li class="list_item">Names will appear here!</li>);
     }
     return (
-        <div>
-          <p>Girls</p>
-          <button onClick={this.goToHomePage}>Home</button>
-          <button onClick={this.goToBoysPage}>Boys</button>
-          <button onClick={this.getNames}>Get Names</button>
-          <ul>{listItems}</ul>
+        <div className="App">
+          <h1 class='title'>Girl Names</h1>
+          <div class="page_buttons">
+            <button class="page_button" id="home_home_button" onClick={this.goToHomePage}>Home</button>
+            <button class="page_button" id="boy_home_button" onClick={this.goToBoysPage}>Boys</button>
+            <button class="page_button" id="girl_home_button" onClick={this.getNames}>Get Names</button>
+          </div>
+          <ul class="list_names" id="girl_list">{listItems}</ul>
         </div>
       );
   }
 }
-export default App;
+export default BoysPage;

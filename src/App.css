@@ -1,20 +1,122 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Greeting {
+  margin-top: 50px;
+  color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.intro {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-top: 25px;
+  font-weight: bold;
+  color: white;
+  background-color: #90EE90;
+  margin-right: 20%;
+  margin-left: 20%;
+  border-radius: 20px;
 }
 
+.HomeButtons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.home_button {
+  padding: 40px;
+  border-radius: 100%;
+  border: 0px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+
+#boy_home_button {
+  background-color: #add8e6;
+}
+
+#boy_home_button:hover{
+  background-color: white;
+  color :#add8e6;
+  border: 2px solid #add8e6;
+}
+
+
+#girl_home_button {
+  background-color: pink;
+}
+
+#girl_home_button:hover{
+  background-color: white;
+  color: pink;
+  border: 2px solid pink;
+}
+
+#home_home_button {
+  background-color: #90EE90;
+}
+
+#home_home_button:hover {
+  background-color: white;
+  color: #90EE90;
+  border: 2px solid #90EE90;
+}
+
+.title {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 75px;
+  color: white;
+}
+
+.page_buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 40px;
+}
+
+.page_button {
+  height: 90px;
+  width: 90px;
+  color: white;
+  border-radius: 100%;
+  border: 0px;
+}
+
+.list_names {
+  list-style: none;
+  border-radius: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: white;
+}
+
+#boy_list {
+  border: 5px solid #add8e6;
+}
+
+#girl_list {
+  border: 5px solid pink;
+}
+
+.list_item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 50%;
+  color: grey;
+}
 .App-header {
-  background-color: #282c34;
+  background-color: yellow;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
