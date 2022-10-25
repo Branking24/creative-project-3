@@ -2,8 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import axios from 'axios';
 
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,6 @@ class App extends React.Component {
   }
   
   goToBoysPage() {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
         <BoysPage />
@@ -22,7 +22,6 @@ class App extends React.Component {
   }
   
   goToGirlsPage() {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
         <GirlsPage />
@@ -49,39 +48,40 @@ class App extends React.Component {
 
 class BoysPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      names:[]
-    }
+      newData: {}
+    };
     this.goToHomePage = this.goToHomePage.bind(this);
     this.goToGirlsPage = this.goToGirlsPage.bind(this);
     this.getNames = this.getNames.bind(this);
   }
   
-  getNames() {
-    var gender = 'neutral';
-    var url = 'https://api.api-ninjas.com/v1/babynames?gender=' + gender;
-    axios.get(url)
-    .then(response => {
-      
+  getNames(event) {
+    event.preventDefault();
+    var gender = 'boy';
+    var endpoint = 'https://api.api-ninjas.com/v1/babynames?gender=' + gender;
+    axios({
+      url: endpoint,
+      method: "GET",
+      headers: {
+        'X-Api-Key': 'xXTuAXAn0aMvPSfdLqvK7Q==opL44ur28to0z61w'
+      },
+      contentType: 'application/json'
     })
-    $.ajax({
-    method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/babynames?gender=' + gender,
-    headers: { 'X-Api-Key': 'YOUR_API_KEY'},
-    contentType: 'application/json',
-    success: function(result) {
-        console.log(result);
-    },
-    error: function ajaxError(jqXHR) {
-        console.error('Error: ', jqXHR.responseText);
-    }
-});
-    this.setState({names:[{"name":"John"}]})
+    .then(response => {
+      let data = response.data;
+      this.setState({newData: data});
+      console.log(data);
+    })
+    .catch(error => {
+      this.setState({names:[]});
+      console.log(error);
+    });
+
   }
   
   goToHomePage() {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
         <App />
@@ -90,7 +90,6 @@ class BoysPage extends React.Component {
   }
   
   goToGirlsPage() {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
         <GirlsPage />
@@ -99,8 +98,10 @@ class BoysPage extends React.Component {
   }
   
   render() {
-    const listItems = this.state.names.map((thistask, index) =>
-    <li>{thistask.name}</li>);
+    const listItems = [];
+    for (let i = 0; i < this.state.newData.length; i++) {
+      listItems.push(<li key={this.state.newData[i]}>{this.state.newData[i]}</li>);
+    }
     return (
         <div>
           <p>Boys</p>
@@ -115,21 +116,39 @@ class BoysPage extends React.Component {
 
 class GirlsPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      names:[]
-    }
+      newData: {}
+    };
     this.goToHomePage = this.goToHomePage.bind(this);
     this.goToBoysPage = this.goToBoysPage.bind(this);
     this.getNames = this.getNames.bind(this);
   }
   
-  getNames() {
-    this.setState({names:[{"name":"John"}]})
+  getNames(event) {
+    event.preventDefault();
+    var gender = 'girl';
+    var endpoint = 'https://api.api-ninjas.com/v1/babynames?gender=' + gender;
+    axios({
+      url: endpoint,
+      method: "GET",
+      headers: {
+        'X-Api-Key': 'xXTuAXAn0aMvPSfdLqvK7Q==opL44ur28to0z61w'
+      },
+      contentType: 'application/json'
+    })
+    .then(response => {
+      let data = response.data;
+      this.setState({newData: data});
+      console.log(data);
+    })
+    .catch(error => {
+      this.setState({names:[]});
+      console.log(error);
+    });
   }
   
   goToHomePage() {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
         <App />
@@ -138,7 +157,6 @@ class GirlsPage extends React.Component {
   }
   
   goToBoysPage() {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
       <React.StrictMode>
         <BoysPage />
@@ -147,8 +165,10 @@ class GirlsPage extends React.Component {
   }
   
   render() {
-    const listItems = this.state.names.map((thistask, index) =>
-    <li>{thistask.name}</li>);
+    const listItems = [];
+    for (let i = 0; i < this.state.newData.length; i++) {
+      listItems.push(<li key={this.state.newData[i]}>{this.state.newData[i]}</li>);
+    }
     return (
         <div>
           <p>Girls</p>
