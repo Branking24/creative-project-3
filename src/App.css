@@ -12,6 +12,8 @@
 .intro {
   padding-top: 25px;
   padding-bottom: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 25px;
   font-weight: bold;
   color: white;
@@ -73,6 +75,8 @@
   margin-bottom: 25px;
   font-size: 75px;
   color: white;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .page_buttons {
@@ -115,26 +119,47 @@
   width: 50%;
   color: grey;
 }
-.App-header {
-  background-color: yellow;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (min-width: 960px) {
+  .Greeting {
+    font-size: 100px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .intro {
+    font-size: 30px;
+  }
+  
+  .home_button {
+    width: 250px;
+    height: 250px;
+    font-size: 50px;
+  }
+  
+  .page_button {
+    width: 200px;
+    height: 200px;
+    font-size: 45px;
+  }
+  
+  .list_item {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .Greeting {
+    font-size: 80px;
+  }
+  
+  .home_button {
+    width: 175px;
+    height: 175px;
+    font-size: 40px;
+  }
+  
+  .page_button {
+    width: 150px;
+    height: 150px;
+    font-size: 35px;
   }
 }

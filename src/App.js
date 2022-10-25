@@ -186,4 +186,4 @@ class GirlsPage extends React.Component {
       );
   }
 }
-export default BoysPage;
+export default App;
